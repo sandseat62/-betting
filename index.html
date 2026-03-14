@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Invisible Casino: Online Betting Factsheet</title>
+    <!-- Tailwind CSS for modern, responsive layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for interactive data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Poppins and Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        graceBlue: '#027DC1',
+                        graceTeal: '#00B0BD',
+                        graceOrange: '#c75d00',
+                        graceDark: '#353230',
+                        graceLight: '#f4f7f6',
+                        graceGold: '#D4AF37'
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .mosaic-bg {
+            background-image: radial-gradient(#00B0BD 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-graceLight font-sans text-graceDark leading-relaxed overflow-x-hidden">
+
+    <!-- Chosen Palette: Grace Brand Harmony (Grace Blue, Grace Teal, Grace Orange, Grace Dark, Grace Light) -->
+    <!-- Application Structure Plan: 
+        The SPA is designed as a thematic dashboard. It uses a navigation-driven approach to allow parents and leadership to explore four critical pillars: 
+        1. 'The Reality' (Stats and overview), 
+        2. 'The Evolution' (Frictionless story), 
+        3. 'The Machine' (Algorithms and targeting), and 
+        4. 'The Defense' (Action plan). 
+        This structure was chosen to transform a linear report into a multi-layered exploration, allowing users to jump directly to sections that concern them most (e.g., how to protect their kids vs understanding the technology).
+    -->
+    <!-- Visualization & Content Choices:
+        1. Top Stats -> Goal: Inform -> Dynamic Stat Cards -> Highlights the 94% mobile bet stat and demographic growth.
+        2. Targeting Analysis -> Goal: Compare -> Doughnut Chart (Chart.js) -> Shows the 1 in 10 young men statistic versus the general population.
+        3. Comparison Matrix -> Goal: Compare -> Interactive Table/List -> Juxtaposes the social/physical friction of a casino against the isolation of a smartphone.
+        4. Ecosystem Map -> Goal: Organize -> Interactive Tiles -> Connects Gaming (Loot Boxes) to Social Media and Betting.
+        Justification: Using a mix of doughnut charts for proportions and interactive comparison blocks ensures the "invisible" nature of the addiction is made visible. library: Chart.js (Canvas).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="bg-graceBlue text-white py-12 px-6 shadow-xl relative overflow-hidden">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <h2 class="text-graceTeal font-heading font-bold uppercase tracking-widest text-sm mb-2">Gracewired.com</h2>
+                    <h1 class="text-4xl md:text-6xl font-heading font-bold leading-tight">The Invisible Casino</h1>
+                    <p class="text-xl text-blue-100 mt-2 font-light">Navigating the Online Betting Crisis in Our Homes</p>
+                </div>
+                <div class="bg-white/10 p-4 rounded-2xl backdrop-blur-md border border-white/20">
+                    <p class="text-xs uppercase font-bold text-graceTeal mb-1">A Mosaic Resource for</p>
+                    <p class="text-lg font-heading">Grace Community Church</p>
+                </div>
+            </div>
+            
+            <nav class="flex flex-wrap gap-2 justify-center md:justify-start">
+                <button onclick="showTab('reality')" class="nav-btn active bg-white text-graceBlue px-6 py-2 rounded-full font-bold transition-all hover:bg-graceTeal hover:text-white">The Reality</button>
+                <button onclick="showTab('evolution')" class="nav-btn bg-graceBlue border border-white/30 text-white px-6 py-2 rounded-full font-bold transition-all hover:bg-white hover:text-graceBlue">Zero Friction</button>
+                <button onclick="showTab('machine')" class="nav-btn bg-graceBlue border border-white/30 text-white px-6 py-2 rounded-full font-bold transition-all hover:bg-white hover:text-graceBlue">The Algorithm</button>
+                <button onclick="showTab('comparison')" class="nav-btn bg-graceBlue border border-white/30 text-white px-6 py-2 rounded-full font-bold transition-all hover:bg-white hover:text-graceBlue">Addiction Cycle</button>
+                <button onclick="showTab('defense')" class="nav-btn bg-graceOrange text-white px-6 py-2 rounded-full font-bold transition-all shadow-lg hover:scale-105">Protect Home</button>
+            </nav>
+        </div>
+        <div class="absolute right-0 top-0 w-64 h-64 bg-graceTeal rounded-full -mr-32 -mt-32 opacity-20"></div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 mosaic-bg min-h-[600px]">
+
+        <!-- TAB: REALITY -->
+        <div id="reality" class="tab-content active animate-in fade-in duration-500">
+            <div class="mb-12">
+                <h2 class="text-3xl font-heading font-bold text-graceBlue mb-4">The Crisis by the Numbers</h2>
+                <p class="text-lg max-w-3xl">In 2026, the casino isn't a building you visit; it's a device in your pocket. These statistics reveal how rapidly gambling has integrated into our daily digital lives.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border-t-4 border-graceTeal">
+                    <p class="text-5xl font-bold text-graceBlue mb-2">94%</p>
+                    <h4 class="font-bold text-lg mb-2">Mobile Dominance</h4>
+                    <p class="text-sm text-gray-500">Of all sports bets are now placed through a phone or computer, bypassing the "social friction" of physical casinos.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border-t-4 border-graceOrange">
+                    <p class="text-5xl font-bold text-graceOrange mb-2">33%</p>
+                    <h4 class="font-bold text-lg mb-2">Underage Exposure</h4>
+                    <p class="text-sm text-gray-500">Percentage of young adults who report placing their first sports bet before they turned 21.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border-t-4 border-graceBlue">
+                    <p class="text-5xl font-bold text-graceBlue mb-2">1 in 10</p>
+                    <h4 class="font-bold text-lg mb-2">High-Risk Youth</h4>
+                    <p class="text-sm text-gray-500">Young men (18-30) now show signs of a gambling problem, triple the rate of the general population.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-lg">
+                <h3 class="text-xl font-heading font-bold mb-6 text-center">Problem Gambling Prevalence: Young Men vs. General Population</h3>
+                <div class="chart-container">
+                    <canvas id="realityChart"></canvas>
+                </div>
+                <p class="text-center text-xs text-gray-400 mt-6 italic">Data points from Gracewired Research 2026</p>
+            </div>
+        </div>
+
+        <!-- TAB: EVOLUTION -->
+        <div id="evolution" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-heading font-bold text-graceBlue mb-6">The Road to "Zero Friction"</h2>
+                    <p class="mb-6">For generations, gambling had "friction"—physical barriers that gave the brain time to pause. Apps have intentionally erased every one of these stop signs.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-blue-100 p-3 rounded-xl text-graceBlue font-bold">01</div>
+                            <div>
+                                <h4 class="font-bold">Digital Numbing</h4>
+                                <p class="text-sm text-gray-600">By using digital wallets and "points," losing money feels like losing a game, not losing hard-earned wages.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-teal-100 p-3 rounded-xl text-graceTeal font-bold">02</div>
+                            <div>
+                                <h4 class="font-bold">Micro-Betting</h4>
+                                <p class="text-sm text-gray-600">Betting on every pitch or penalty kick creates hundreds of rapid-fire dopamine hits in a single hour.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-orange-100 p-3 rounded-xl text-graceOrange font-bold">03</div>
+                            <div>
+                                <h4 class="font-bold">Total Portability</h4>
+                                <p class="text-sm text-gray-600">The casino now follows the user to the office, the dinner table, and even the bedroom.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-2 rounded-3xl shadow-2xl border border-gray-100">
+                    <div class="bg-graceDark p-8 rounded-2xl text-white">
+                        <h4 class="text-graceTeal font-bold mb-4">Friction Comparison</h4>
+                        <div class="space-y-4">
+                            <div class="pb-4 border-b border-gray-700">
+                                <p class="text-xs text-gray-400 uppercase">1990: High Friction</p>
+                                <p class="font-medium">Travel $\rightarrow$ ATM $\rightarrow$ Social Interaction $\rightarrow$ Bet</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-graceOrange uppercase">2026: Zero Friction</p>
+                                <p class="font-medium">Urge $\rightarrow$ FaceID $\rightarrow$ Digital Bet (2 Seconds)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: MACHINE -->
+        <div id="machine" class="tab-content">
+            <h2 class="text-3xl font-heading font-bold text-graceBlue mb-8">The Precision of the Predator</h2>
+            <p class="text-lg mb-10 max-w-4xl">Modern betting apps don't just offer odds; they use "Agentic AI" to build a profile of your psychological vulnerabilities.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm">
+                    <h4 class="text-graceOrange font-bold text-xl mb-4">The "Loss-Trap" Algorithm</h4>
+                    <p class="mb-4">If the system sees a user is about to quit after a loss, it instantly pushes a "Risk-Free Bonus" notification. This is timed to intercept the "logical pause" where a user might otherwise walk away.</p>
+                    <div class="chart-container">
+                        <canvas id="algorithmChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm">
+                    <h4 class="text-graceBlue font-bold text-xl mb-4">Demographic Targeting</h4>
+                    <ul class="space-y-4">
+                        <li class="bg-gray-50 p-4 rounded-xl border-l-4 border-graceTeal">
+                            <span class="font-bold">Young Men (18-30):</span> Targeted through sports podcasts and "status-based" marketing.
+                        </li>
+                        <li class="bg-gray-50 p-4 rounded-xl border-l-4 border-graceBlue">
+                            <span class="font-bold">Teenagers:</span> Targeted via video game "Loot Boxes" which groom the brain's reward centers for gambling.
+                        </li>
+                        <li class="bg-gray-50 p-4 rounded-xl border-l-4 border-graceDark">
+                            <span class="font-bold">Casual Fans:</span> Targeted through "Micro-Betting" integrated directly into live broadcasts.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: COMPARISON -->
+        <div id="comparison" class="tab-content">
+            <h2 class="text-3xl font-heading font-bold text-graceBlue mb-8">The Cycle: Casino vs. Pocket</h2>
+            
+            <div class="bg-white rounded-3xl overflow-hidden shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 bg-graceDark text-white font-bold p-6">
+                    <div>Factor</div>
+                    <div class="text-gray-400">Traditional Casino</div>
+                    <div class="text-graceTeal">Online Betting App</div>
+                </div>
+                <div class="divide-y divide-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-3 p-6 items-center">
+                        <div class="font-bold text-graceBlue">Speed</div>
+                        <div class="text-sm">Slower (dealing, shuffling)</div>
+                        <div class="text-sm font-medium">Instant (Every 10 seconds)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 p-6 items-center">
+                        <div class="font-bold text-graceBlue">Social Control</div>
+                        <div class="text-sm">High (Others see you)</div>
+                        <div class="text-sm font-medium">Zero (Complete isolation)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 p-6 items-center">
+                        <div class="font-bold text-graceBlue">Money Awareness</div>
+                        <div class="text-sm">Physical Cash (Hand-to-Hand)</div>
+                        <div class="text-sm font-medium">Digital Points (Biometric)</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 p-6 items-center">
+                        <div class="font-bold text-graceBlue">The "Exit"</div>
+                        <div class="text-sm">Physical Doors (Walk Out)</div>
+                        <div class="text-sm font-medium">None (The phone follows you)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: DEFENSE -->
+        <div id="defense" class="tab-content">
+            <div class="max-w-4xl mx-auto text-center mb-12">
+                <h2 class="text-3xl font-heading font-bold text-graceBlue mb-4">Your Action Plan</h2>
+                <p class="text-lg">We are not helpless. As a church family, we can implement "Digital Friction" to protect our homes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-8 rounded-3xl shadow-sm text-left">
+                    <h4 class="text-graceTeal font-bold text-xl mb-4">1. Build Digital Walls</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li>Disconnect saved credit cards from teenagers' phones.</li>
+                        <li>Turn off "One-Click" buying features.</li>
+                        <li>Use DNS filtering (like OpenDNS) to block betting sites at the router level.</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm text-left">
+                    <h4 class="text-graceOrange font-bold text-xl mb-4">2. The "Prefrontal" Conversation</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li>Discuss "Loot Boxes" in games as gambling training.</li>
+                        <li>Explain how apps use FaceID to bypass logic.</li>
+                        <li>Maintain a "High-Trust, Low-Shame" environment for confession.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-graceDark text-white p-12 rounded-3xl text-center">
+                <h3 class="text-2xl font-heading font-bold mb-4">Need More Help?</h3>
+                <p class="mb-8 text-gray-300 max-w-2xl mx-auto">If you or someone in your family is caught in the cycle of online betting, you are not alone. Our Pastoral Care team is trained in digital dependency issues.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#" class="bg-graceTeal text-white px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform">Contact Pastoral Care</a>
+                    <a href="#" class="bg-white text-graceDark px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform">Download Covenant Template</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-100 py-12 px-6 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+            <div class="text-center md:text-left mb-6 md:mb-0">
+                <p class="font-bold text-graceBlue">Grace Community Church</p>
+                <p>Detroit, Michigan | "We are a mosaic striving to live like Jesus."</p>
+            </div>
+            <div class="text-center md:text-right">
+                <p>&copy; 2026 Gracewired.com</p>
+                <p>For more resources, visit the GraceWired Hub.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Navigation Logic
+        function showTab(tabId) {
+            // Update Tab Visibility
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+
+            // Update Nav Buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-graceBlue');
+                btn.classList.add('bg-graceBlue', 'text-white', 'border', 'border-white/30');
+            });
+            event.currentTarget.classList.remove('bg-graceBlue', 'text-white', 'border', 'border-white/30');
+            event.currentTarget.classList.add('bg-white', 'text-graceBlue');
+
+            // Redraw charts if needed
+            if(tabId === 'reality') renderRealityChart();
+            if(tabId === 'machine') renderAlgorithmChart();
+        }
+
+        // Charts Initialization
+        let realityChart, algorithmChart;
+
+        function renderRealityChart() {
+            if(realityChart) realityChart.destroy();
+            const ctx = document.getElementById('realityChart').getContext('2d');
+            realityChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Gen Population', 'Young Men (18-30)'],
+                    datasets: [{
+                        label: 'Gambling Problem Prevalence (%)',
+                        data: [3, 10],
+                        backgroundColor: ['#00B0BD', '#c75d00'],
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 15 }
+                    }
+                }
+            });
+        }
+
+        function renderAlgorithmChart() {
+            if(algorithmChart) algorithmChart.destroy();
+            const ctx = document.getElementById('algorithmChart').getContext('2d');
+            algorithmChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Start', 'Winning Streak', 'Peak Excitement', 'Big Loss', 'Attempt to Exit', 'Push Notification'],
+                    datasets: [{
+                        label: 'Dopamine Levels',
+                        data: [20, 50, 90, 10, 5, 80],
+                        borderColor: '#027DC1',
+                        backgroundColor: 'rgba(2, 125, 193, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Initial Load
+        window.onload = function() {
+            renderRealityChart();
+        }
+    </script>
+</body>
+</html>
